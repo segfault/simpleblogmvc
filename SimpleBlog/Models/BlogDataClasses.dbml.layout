@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
+  <DataContextMoniker Name="/BlogDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8c7f4d5f-a41e-4a33-adac-c5110d235182" absoluteBounds="0.875, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BlogDataContext/Article" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0bbbaae3-d5b7-4e69-8fcc-100f6cb75b91" absoluteBounds="0.89000000000000012, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b2e8ba26-3b2f-4470-b902-e45791c18e09" absoluteBounds="4.75, 1.25, 2, 2.5401025390625">
+      <DataClassMoniker Name="/BlogDataContext/Comment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3c90ba24-20e0-4f18-b326-8e6fe8cc8a8b" absoluteBounds="4.765, 1.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f2da91d5-e971-4096-8263-4a448533e103" absoluteBounds="0.75, 4.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/BlogDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="714bbf03-06ec-43b5-983a-8431ceeb02a6" absoluteBounds="0.76500000000000012, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.8125 : 4.25); (1.8125 : 3.03049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BlogDataContext/User/User_Article" />
+      <nodes>
+        <classShapeMoniker Id="f2da91d5-e971-4096-8263-4a448533e103" />
+        <classShapeMoniker Id="8c7f4d5f-a41e-4a33-adac-c5110d235182" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.875 : 2.14024983723958); (4.75 : 2.14024983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BlogDataContext/Article/Article_Comment" />
+      <nodes>
+        <classShapeMoniker Id="8c7f4d5f-a41e-4a33-adac-c5110d235182" />
+        <classShapeMoniker Id="b2e8ba26-3b2f-4470-b902-e45791c18e09" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

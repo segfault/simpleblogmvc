@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="blogdb" Class="BlogDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\blogdb.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="blogdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Articles" Member="Articles">
+    <Type Name="Article">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="slug" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="body" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="updated_on" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created_on" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="author_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Article_Comment" Member="Comments" ThisKey="id" OtherKey="article_id" Type="Comment" />
+      <Association Name="User_Article" Member="User" ThisKey="author_id" OtherKey="id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comments" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="article_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="author_name" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="author_email" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="author_url" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="updated_on" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created_on" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Member="body" Type="System.String" CanBeNull="false" />
+      <Association Name="Article_Comment" Member="Article" ThisKey="article_id" OtherKey="id" Type="Article" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="pass" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Article" Member="Articles" ThisKey="id" OtherKey="author_id" Type="Article" />
+    </Type>
+  </Table>
+</Database>
