@@ -16,6 +16,7 @@ namespace SimpleBlog
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute( "ArticleAction", "{year}/{month}/{day}/{slug}/{action}", new { controller = "Article", action = "Show" });
             routes.MapRoute( "ArticleLookup", "{year}/{month}/{day}/{slug}", new { controller = "Article", action = "Show" } );
             routes.MapRoute( "Default",       "{controller}/{action}",  new { controller = "Article", action = "Index" } );
 

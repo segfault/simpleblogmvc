@@ -34,25 +34,57 @@ namespace SimpleBlog.Controllers
             return View();
         }
 
-
-        public ActionResult Show(int year, int month, int day, string slug)
+        protected Article _getArticle(BlogDataContext db, int year, int month, int day, string slug)
         {
-
-            BlogDataContext db = new BlogDataContext();
-            
             var article = from art in db.Articles
                           where art.slug == slug
                             && art.created_on.Value.Year == year
                             && art.created_on.Value.Month == month
                             && art.created_on.Value.Day == day
                           select art;
+
+            return article.First();
+        }
+
+
+        public ActionResult Show(int year, int month, int day, string slug)
+        {
+            BlogDataContext db = new BlogDataContext();
+
+            var article = _getArticle( db, year, month, day, slug );
+
             if (article == null)
                 throw new HttpException(404, "Unable to find requested article");
 
-            ViewData["PageTitle"] = string.Format("{0} - {1}", _blogName, article.First().title);
+            ViewData["PageTitle"] = string.Format("{0} - {1}", _blogName, article.title);
             ViewData["BlogTitle"] = _blogName;
 
-            return View(article.First());
+            return View(article);
+        }
+
+        public ActionResult Comment(int year, int month, int day, string slug, [Bind(Prefix="comment")]Comment newComment)
+        {
+            BlogDataContext db = new BlogDataContext();
+
+            var article = _getArticle(db, year, month, day, slug );
+            if (article == null)
+                throw new HttpException(404, "Unable to find requested article");
+
+            if (newComment == null)
+                throw new HttpException(500, "Unable to leave comment");
+
+            var errs = newComment.ValidationErrors();
+            if (errs.Count() > 0)
+            {
+                TempData["error"] = errs;
+                return RedirectToAction("Show", article.LinkDataCollection);
+            }
+
+            newComment.created_on = DateTime.Now;
+            article.Comments.Add(newComment);
+            db.SubmitChanges();
+
+            return RedirectToRoute("ArticleLookup", article.LinkDataCollection);
         }
     }
 }

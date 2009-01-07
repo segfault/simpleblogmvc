@@ -30,13 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenId, Version=2.5.1.8313, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\DotNetOpenId.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib, Version=0.0.1.174, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\lib\mvccontrib\Bin\MvcContrib.dll</HintPath>
+      <HintPath>..\Dependencies\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="MvcContrib.NHamlViewEngine, Version=0.0.1.174, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\lib\mvccontrib\Bin\MvcContrib.NHamlViewEngine.dll</HintPath>
+      <HintPath>..\Dependencies\MvcContrib.NHamlViewEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -95,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BlogDataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Admin\Account\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
@@ -176,6 +181,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.2.6-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Views\Article\Index.aspx" />
     <Content Include="Views\Article\Show.aspx" />
     <Content Include="Views\Shared\ArticleDisplay.ascx" />

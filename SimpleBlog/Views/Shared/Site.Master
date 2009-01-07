@@ -1,5 +1,4 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SimpleBlog.Views.Shared.Site" %>
-<%@ Import Namespace="MvcContrib.UI.Html" %>
 <%@ Import Namespace="SimpleBlog.Models" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -9,6 +8,7 @@
     <title><%= Html.Encode(ViewData["PageTitle"]) %></title>
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery.validate.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,29 @@
                 <h1><%= Html.Encode(ViewData["PageTitle"])%></h1>
             </div>
         </div>
-        <br style="clear: both;" />
+        <br style="clear: both;" /> 
+        <% foreach (var mt in new[] { "notice", "error" }) // display our notice & error messages
+           {
+               if (TempData.ContainsKey(mt))
+               { %>
+        <div id="<%= mt %>">               
+                <% if (TempData[mt] is IEnumerable<string>)
+                   { %>
+                <ul>
+                    <%foreach (string msg in (TempData[mt] as IEnumerable<string>))
+                      { %>
+                      <li><%= msg%></li>
+                    <%} %>
+                </ul>
+                <% }
+                   else
+                   { %>
+                <%= TempData[mt]%>
+                <% } %>
+        </div>                
+        <%      }
+           }%>
+                
         
         <div id="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
