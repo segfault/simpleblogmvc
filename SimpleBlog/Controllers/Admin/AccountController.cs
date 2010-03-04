@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
+using System.Text;
 
 namespace SimpleBlog.Controllers.Admin
 {
@@ -197,7 +198,7 @@ namespace SimpleBlog.Controllers.Admin
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(string username, string email, string password, string confirmPassword)
         {
-
+            
             ViewData["Title"] = "Register";
             ViewData["PasswordLength"] = Provider.MinRequiredPasswordLength;
 
