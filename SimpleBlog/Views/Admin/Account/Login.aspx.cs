@@ -11,5 +11,10 @@ namespace SimpleBlog.Views.Account
         // adding a comment. because I can.
         // another change to this test branch.
         
+
+        public void Test()
+        {
+            // another comment in this method./class
+        }
     }
 }
